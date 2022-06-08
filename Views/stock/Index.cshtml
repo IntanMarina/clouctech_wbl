@@ -1,0 +1,64 @@
+﻿@model IEnumerable<clouctech_wbl.Models.tb_stock>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Stock Lists</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Index", "cstock/Index")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.s_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.s_qtty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.s_modal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.s_hargatin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.s_vending)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.s_untungtin)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.s_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.s_qtty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.s_modal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.s_hargatin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.s_vending)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.s_untungtin)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.s_id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.s_id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.s_id })
+            </td>
+        </tr>
+    }
+
+</table>

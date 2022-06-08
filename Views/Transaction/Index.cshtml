@@ -1,0 +1,130 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Create transaction</h2>
+
+<div class="row">
+    @using (Html.BeginForm("Save", "Transaction", FormMethod.Post, new { ID = "popupForm" }))
+    {
+        
+
+
+        <div class="form-group">
+            <label class="form-label">Stock Name</label>
+            <select class="form-control" id="s_name" name="s_name" placeholder="Stock name" required>
+                <option>Select</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Quantity Sold</label>
+            <input type="text" id="t_qttyjual" name="t_qttyjual" class="form-control" placeholder="Quantity sold" required>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Stock Topup</label>
+            <input type="text" id="t_topup" name="t_topup" class="form-control" placeholder="Stock topup" required>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Profit</label>
+            <input type="text" id="t_untung" name="t_untung" class="form-control" placeholder="Profit" required>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Tunai Slot</label>
+            <input type="text" id="t_tunaislot" name="t_tunaislot" class="form-control" placeholder="Tunai slot" required>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-success">
+            <button type="button" onclick="location.href='@Url.Action("Index","eftransaction")'" class="btn btn-info">View transactions</button>
+        </div>
+
+
+
+        <div class="form-group">
+            <input type="hidden" id="s_id" name="s_id" class="form-control" placeholder="Stock topup" required>
+        </div>
+    }
+</div>
+
+@section scripts
+{
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+
+    <script>
+
+            getstock();
+            function getstock() {
+                $.ajax({
+                    type: 'GET',
+                    url: 'getstock',
+                    dataType: 'JSON',
+                    success: function (data) {
+                        console.log(data);
+                        for (var i = 0; i < data.length; i++) {
+                            $("#s_name").append($("<option/>", {
+                                text: data[i].s_name
+                            }));
+                        }
+                    }
+                });
+            }
+
+            getsid();
+            function getsid() {
+                $("#s_name").change(function (e) {
+
+                    $.ajax({
+                        type: 'POST',
+                        url: 'getsid?id=' + $("#s_name").val().trim(),
+                        datatype: 'JSON',
+                        success: function (data) {
+
+                            $("#s_id").val(data)
+                        }
+                    });
+                });
+            }
+
+            getprofit();
+            function getprofit() {
+                $("#t_qttyjual").change(function (e) {
+                    var qttyjual = $("#t_qttyjual").val();
+
+                    $.ajax({
+                        type: 'POST',
+                        url: 'getprofit?id=' + $("#s_id").val().trim(),
+                        datatype: 'JSON',
+                        success: function (data) {
+                            var profit = (qttyjual*data).toFixed(2);
+                            $("#t_untung").val(profit)
+                        }
+                    });
+                });
+            }
+
+            gettunaislot();
+            function gettunaislot() {
+                $("#t_topup").change(function (e) {
+                    var topup = $("#t_topup").val();
+
+                    $.ajax({
+                        type: 'POST',
+                        url: 'gettunaislot?id=' + $("#s_id").val().trim(),
+                        datatype: 'JSON',
+                        success: function (data) {
+                            var tunaislot = (topup * data).toFixed(2);
+                            $("#t_tunaislot").val(tunaislot)
+                        }
+                    });
+                });
+            }
+
+    </script>
+}

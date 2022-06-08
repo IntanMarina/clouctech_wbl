@@ -1,0 +1,60 @@
+﻿@model IEnumerable<clouctech_wbl.Models.tb_transaction>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Transaction Lists</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Index", "Transaction/Index")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.tb_stock.s_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.t_qttyjual)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.t_topup)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.t_untung)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.t_tunaislot)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tb_stock.s_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.t_qttyjual)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.t_topup)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.t_untung)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.t_tunaislot)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.t_id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.t_id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.t_id })
+            </td>
+        </tr>
+    }
+
+</table>

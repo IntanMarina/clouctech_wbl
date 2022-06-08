@@ -1,0 +1,58 @@
+﻿@model clouctech_wbl.Models.tb_transaction
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tb_transaction</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.t_qttyjual)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.t_qttyjual)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.t_topup)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.t_topup)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.t_untung)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.t_untung)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.t_tunaislot)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.t_tunaislot)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tb_stock.s_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_stock.s_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.t_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

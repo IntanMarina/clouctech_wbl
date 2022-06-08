@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="db_isModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tb_report">
+          <Key>
+            <PropertyRef Name="r_id" />
+          </Key>
+          <Property Name="r_id" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="r_date" Type="date" Nullable="false" />
+          <Property Name="r_stock" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_stock">
+          <Key>
+            <PropertyRef Name="s_id" />
+          </Key>
+          <Property Name="s_id" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="s_name" Type="nchar" MaxLength="10" />
+          <Property Name="s_qtty" Type="int" />
+          <Property Name="s_modal" Type="int" />
+          <Property Name="s_topup" Type="int" />
+          <Property Name="s_hargatin" Type="int" />
+          <Property Name="s_qttyjual" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_user">
+          <Key>
+            <PropertyRef Name="u_id" />
+          </Key>
+          <Property Name="u_id" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="u_pwd" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="u_name" Type="nchar" MaxLength="10" />
+          <Property Name="u_contact" Type="nchar" MaxLength="10" />
+          <Property Name="u_type" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tb_report_tb_stock">
+          <End Role="tb_stock" Type="Self.tb_stock" Multiplicity="1" />
+          <End Role="tb_report" Type="Self.tb_report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_stock">
+              <PropertyRef Name="s_id" />
+            </Principal>
+            <Dependent Role="tb_report">
+              <PropertyRef Name="r_stock" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_isModelStoreContainer">
+          <EntitySet Name="tb_report" EntityType="Self.tb_report" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_stock" EntityType="Self.tb_stock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_user" EntityType="Self.tb_user" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tb_report_tb_stock" Association="Self.FK_tb_report_tb_stock">
+            <End Role="tb_stock" EntitySet="tb_stock" />
+            <End Role="tb_report" EntitySet="tb_report" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db_isModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tb_report">
+          <Key>
+            <PropertyRef Name="r_id" />
+          </Key>
+          <Property Name="r_id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="r_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="r_stock" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tb_stock" Relationship="Self.FK_tb_report_tb_stock" FromRole="tb_report" ToRole="tb_stock" />
+        </EntityType>
+        <EntityType Name="tb_stock">
+          <Key>
+            <PropertyRef Name="s_id" />
+          </Key>
+          <Property Name="s_id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="s_name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="s_qtty" Type="Int32" />
+          <Property Name="s_modal" Type="Int32" />
+          <Property Name="s_topup" Type="Int32" />
+          <Property Name="s_hargatin" Type="Int32" />
+          <Property Name="s_qttyjual" Type="Int32" />
+          <NavigationProperty Name="tb_report" Relationship="Self.FK_tb_report_tb_stock" FromRole="tb_stock" ToRole="tb_report" />
+        </EntityType>
+        <EntityType Name="tb_user">
+          <Key>
+            <PropertyRef Name="u_id" />
+          </Key>
+          <Property Name="u_id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="u_pwd" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="u_name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="u_contact" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="u_type" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tb_report_tb_stock">
+          <End Role="tb_stock" Type="Self.tb_stock" Multiplicity="1" />
+          <End Role="tb_report" Type="Self.tb_report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_stock">
+              <PropertyRef Name="s_id" />
+            </Principal>
+            <Dependent Role="tb_report">
+              <PropertyRef Name="r_stock" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_isEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tb_report" EntityType="Self.tb_report" />
+          <EntitySet Name="tb_stock" EntityType="Self.tb_stock" />
+          <EntitySet Name="tb_user" EntityType="Self.tb_user" />
+          <AssociationSet Name="FK_tb_report_tb_stock" Association="Self.FK_tb_report_tb_stock">
+            <End Role="tb_stock" EntitySet="tb_stock" />
+            <End Role="tb_report" EntitySet="tb_report" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="db_isModelStoreContainer" CdmEntityContainer="db_isEntities">
+          <EntitySetMapping Name="tb_report">
+            <EntityTypeMapping TypeName="db_isModel.tb_report">
+              <MappingFragment StoreEntitySet="tb_report">
+                <ScalarProperty Name="r_id" ColumnName="r_id" />
+                <ScalarProperty Name="r_date" ColumnName="r_date" />
+                <ScalarProperty Name="r_stock" ColumnName="r_stock" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_stock">
+            <EntityTypeMapping TypeName="db_isModel.tb_stock">
+              <MappingFragment StoreEntitySet="tb_stock">
+                <ScalarProperty Name="s_id" ColumnName="s_id" />
+                <ScalarProperty Name="s_name" ColumnName="s_name" />
+                <ScalarProperty Name="s_qtty" ColumnName="s_qtty" />
+                <ScalarProperty Name="s_modal" ColumnName="s_modal" />
+                <ScalarProperty Name="s_topup" ColumnName="s_topup" />
+                <ScalarProperty Name="s_hargatin" ColumnName="s_hargatin" />
+                <ScalarProperty Name="s_qttyjual" ColumnName="s_qttyjual" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_user">
+            <EntityTypeMapping TypeName="db_isModel.tb_user">
+              <MappingFragment StoreEntitySet="tb_user">
+                <ScalarProperty Name="u_id" ColumnName="u_id" />
+                <ScalarProperty Name="u_pwd" ColumnName="u_pwd" />
+                <ScalarProperty Name="u_name" ColumnName="u_name" />
+                <ScalarProperty Name="u_contact" ColumnName="u_contact" />
+                <ScalarProperty Name="u_type" ColumnName="u_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

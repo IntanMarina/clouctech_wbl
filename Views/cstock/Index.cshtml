@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    @using (Html.BeginForm("Save", "cstock", FormMethod.Post, new { ID = "popupForm" }))
+    {
+        <div>
+            <h1>Create Stock</h1>
+        </div>
+
+
+        <div class="form-group">
+            <label class="form-label">Stock Name</label>
+            <input type="text" id="s_name" name="s_name" class="form-control" placeholder="Stock name" required>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Stock Quantity</label>
+            <input type="text" id="s_qtty" name="s_qtty" class="form-control" placeholder="Stock quantity" required>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Stock Capital</label>
+            <input type="text" id="s_modal" name="s_modal" class="form-control" placeholder="Stock capital" required>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Price per can</label>
+            <input type="text" id="s_hargatin" name="s_hargatin" class="form-control" placeholder="Price per can" required>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Vending machine</label>
+            <input type="text" id="s_vending" name="s_vending" class="form-control" placeholder="Vending machine" required>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Profit per tin</label>
+            <input type="text" id="s_untungtin" name="s_untungtin" class="form-control" placeholder="Profit per tin">
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-success">
+            <button type="button" onclick="location.href='@Url.Action("Index","stock")'" class="btn btn-info">View stock</button>
+        </div>
+    }
+</div>
+
+@section scripts
+{
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+
+    <script>
+
+        getUntungtin();
+        function getUntungtin() {
+            $("#s_hargatin").change(function (e) {
+                var hargatin1 = $("#s_hargatin").val();
+                var modal1 = $("#s_modal").val();
+                var qtty1 = $("#s_qtty").val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'getUntungtin',
+                    datatype : 'JSON',
+                    success: function (data) {
+                        var untungtin = (hargatin1 - (modal1 / qtty1)).toFixed(2);
+                        $("#s_untungtin").val(untungtin)
+                    }
+                });
+
+            });
+        }
+
+
+    </script>
+
+
+}
+

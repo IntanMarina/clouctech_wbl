@@ -1,0 +1,66 @@
+﻿@model clouctech_wbl.Models.tb_stock
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tb_stock</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.s_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.s_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.s_qtty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.s_qtty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.s_modal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.s_modal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.s_hargatin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.s_hargatin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.s_vending)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.s_vending)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.s_untungtin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.s_untungtin)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.s_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
