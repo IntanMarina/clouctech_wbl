@@ -25,15 +25,15 @@ namespace clouctech_wbl.Models
         [Required(ErrorMessage = "This field is mandatory.")]
         public string u_pwd { get; set; }
 
-        [DisplayName("Name")]
+        [DisplayName ("Name")]
 
         public string u_name { get; set; }
 
-        [DisplayName("Contact")]
+        [DisplayName ("Contact")]
 
         public string u_contact { get; set; }
 
-        [DisplayName("User Type")]
+        [DisplayName ("User Type")]
 
         public int u_type { get; set; }
 
